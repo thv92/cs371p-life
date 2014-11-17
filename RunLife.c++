@@ -10,6 +10,7 @@
 
 #include <cassert>  // assert
 #include <iostream> // cout, endl
+#include "Life.h"
 
 // ----
 // main
@@ -27,6 +28,19 @@ int main () {
     Simulate 12 evolutions.
     Print every grid (i.e. 0, 1, 2, 3, ... 12)
     */
+
+    int y1;
+    int x1;
+    std::string name1;
+    std::cin >> name1;
+    std::cin >> y1;
+    std::cin >> x1;
+    
+
+    std::cout << name1 << std::endl;
+    std::cout << y1 << " " << x1 << std::endl;    
+    Life<ConwayCell> board1(y1, x1); 
+    board1.prepareBoard(std::cin);
 
     // -----------------
     // Conway Cell 20x29
