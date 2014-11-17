@@ -12,11 +12,11 @@ html: Doxyfile Life.h Life.c++ RunLife.c++ TestLife.c++
 RunLife: Life.h Life.c++ RunLife.c++
 	g++-4.7 -pedantic -std=c++11 -Wall Life.c++ RunLife.c++ -o RunLife
 
-RunLife.out: RunLife
-	RunLife > RunLife.out
+RunLife.out: RunLife RunLife.in
+	RunLife < RunLife.in > RunLife.out
 
-RunLife.tmp: RunLife
-	RunLife > RunLife.tmp
+RunLife.tmp: RunLife RunLife.in
+	RunLife < RunLife.in > RunLife.tmp
 	diff RunLife.tmp RunLife.out
 
 TestLife: Life.h Life.c++ TestLife.c++
