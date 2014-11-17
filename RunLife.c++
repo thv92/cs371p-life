@@ -52,6 +52,21 @@ int main () {
     Print every 4th grid (i.e. 0, 4, 8, ... 28)
     */
 
+    // int y2;
+    // int x2;
+    // std::string name2;
+    // std::cin >> name2;
+    // std::cin >> y2;
+    // std::cin >> x2;
+    
+
+    // std::cout << name2 << std::endl;
+    // std::cout << y2 << " " << x2 << std::endl;    
+    // Life<ConwayCell> board2(y2, x2); 
+    // board2.prepareBoard(std::cin);
+
+
+
     // ------------------
     // Conway Cell 109x69
     // ------------------
