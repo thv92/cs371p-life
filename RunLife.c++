@@ -39,7 +39,7 @@ int main () {
 
     std::cout << name1 << std::endl;
     std::cout << y1 << " " << x1 << std::endl;    
-    Life<ConwayCell> board1(y1, x1); 
+    Life<ConwayCell> board1(y1, x1, 12); 
     board1.prepareBoard(std::cin);
 
     // -----------------
@@ -62,7 +62,7 @@ int main () {
 
     // std::cout << name2 << std::endl;
     // std::cout << y2 << " " << x2 << std::endl;    
-    // Life<ConwayCell> board2(y2, x2); 
+    // Life<ConwayCell> board2(y2, x2, 28); 
     // board2.prepareBoard(std::cin);
 
 

@@ -10,11 +10,14 @@
 #include <string> 
 #include <cstring>
 
+#define DEBUGLIFE true
+
 //-------
 // enums
 //-------
 
-enum cell_t {CONWAY, FREDKIN, CELL, IDK};
+enum cell_t {CONWAY, FREDKIN, IDK};
+
 
 
 //--------------
@@ -24,7 +27,7 @@ enum cell_t {CONWAY, FREDKIN, CELL, IDK};
 class AbstractCell{
     public:
         AbstractCell();
-        AbstractCell(const int& cellType);
+        AbstractCell(cell_t cellType, bool alive);
         virtual ~AbstractCell();
         virtual bool deadOrAlive();
     private:
@@ -57,7 +60,7 @@ class Cell{
 class ConwayCell : AbstractCell{
     public:
         ConwayCell();
-        ConwayCell(const int& cellType);
+        ConwayCell(bool alive);
         ~ConwayCell();
     private:
 
@@ -72,7 +75,7 @@ class ConwayCell : AbstractCell{
 class FredkinCell : AbstractCell{
     public:
         FredkinCell();
-        FredkinCell(const int& cellType);
+        FredkinCell(bool alive);
         ~FredkinCell();
     private:
         int _age;
@@ -100,8 +103,8 @@ class Life{
          * @param y number of columns
          */
 
-        Life(const int& y, const int& x): 
-        _x(x), _y(y), _size(x*y), _board(x*y){}
+        Life(const int& y, const int& x, const int& gen): 
+                    _x(x), _y(y), _size(_x*_y), _gen(gen), _board(x*y){}
 
 
         //--------------
@@ -114,7 +117,7 @@ class Life{
          */
 
         void prepareBoard(std::istream& r){
-
+            int index = 0;
             for(int i = 0; i < _y; ++i){
 
                 r.ignore(80, '\n');
@@ -123,21 +126,33 @@ class Life{
                     char k;
                     r >> k;
 
-                    std::cout << k;
+                    //dead = . | alive = something else
+                    _board[index] = T(k == '.' ? false : true);
+                    ++index;
                 }
-                std::cout << std::endl;
             }
+        }
 
+
+        //----------
+        // simulate
+        //----------
+
+        /**
+         * simulate life cycle of cells for each generation
+         */
+
+        void simulate(){
 
 
 
         }
 
-
     private:
         const int _x;
         const int _y;
         const int _size;
+        const int _gen;
         std::vector<T> _board;
 
     };

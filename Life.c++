@@ -15,84 +15,40 @@
 //--------------
 
 AbstractCell::AbstractCell(){}
-AbstractCell::AbstractCell(const int& cellType): _cellType(static_cast<cell_t>(cellType)){}
+AbstractCell::AbstractCell(cell_t cellType, bool alive): _alive(alive), _cellType(cellType){}
+
 AbstractCell::~AbstractCell(){}
 
 bool AbstractCell::deadOrAlive(){return 0;}
 
 
-//--------------
-// Cell
-//--------------
+// //--------------
+// // Cell
+// //--------------
 
 
 
 
 
 
-//------------
-// ConwayCell
-//------------
+// //------------
+// // ConwayCell
+// //------------
 
 ConwayCell::ConwayCell(){}
-ConwayCell::ConwayCell(const int& cellType): AbstractCell(cellType){}
+ConwayCell::ConwayCell(bool alive): AbstractCell(CONWAY, alive){}
 ConwayCell::~ConwayCell(){}
 
 
 
 
-//-------------
-// FredkinCell
-//-------------
+// //-------------
+// // FredkinCell
+// //-------------
 
 FredkinCell::FredkinCell(){}
-FredkinCell::FredkinCell(const int& cellType): AbstractCell(cellType){}
+FredkinCell::FredkinCell(bool alive): AbstractCell(FREDKIN, alive){}
 FredkinCell::~FredkinCell(){}
 
-
-
-
-
-
-
-
-
-
-
-//     std::string temp;
-//     getline(r, temp);
-    
-//     // int debug = 0;
-//     while((strcmp(temp.c_str(), "") > 0 || strcmp(temp.c_str(), " ") > 0) || strcmp(temp.c_str(), "\0") > 0){
-//         Ballot new_ballot;
-//         new_ballot.index = 0;
-
-//         std::stringstream ssin(temp.c_str()); 
-
-//         int index = 0;
-        
-//         while(index < num_candidate){
-//             int vote;
-//             ssin >> vote;
-//             new_ballot.candidate_ballot.push_back(vote);
-//             index++;
-//         }
-//         list_of_ballot.push_back(new_ballot);
-        
-//         if(r.peek() == EOF){
-//             break;
-//         }
-
-//         getline(r, temp);
-
-//     }
-
-
-
-
-
-// template class Life<Cell>;
-// template class Life<ConwayCell>;
-// template class Life<FredkinCell>;
 
 
