@@ -13,6 +13,8 @@
 
 #define DEBUGLIFE false
 #define DEBUGC false
+#define DEBUF false
+
 //-------
 // enums
 //-------

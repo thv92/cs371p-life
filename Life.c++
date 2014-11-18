@@ -86,9 +86,33 @@ FredkinCell::~FredkinCell(){}
 
 
 bool FredkinCell::deadOrAlive(std::vector<bool> neighbors){
+    int neighborCount = 0;
 
+    for(int i = 0; i < (int) neighbors.size(); ++i){
+        if(((i%2) == 0) && neighbors[i]){
+            ++neighborCount;
+        }
+    }
 
+    if(DEBUGF)
+    std::cout << "Neighbor Count: " << neighborCount << std::endl;
 
+    if(_alive){
+        if(DEBUGF)
+        std::cout << " I am alive " << std::endl;
+        if(neighborCount == 0 ||  neighborCount == 2 || neighborCount == 4){
+            return false;
+        }else{
+            return true;
+        }
+    }else{
+        if(DEBUGF)
+        std::cout << " I am dead " << std::endl;
+
+        if(neighborCount == 1 || neighborCount == 3){
+            return true;
+        }
+    }
 
     return false;
 }
