@@ -36,11 +36,19 @@ int main () {
     std::cin >> y1;
     std::cin >> x1;
     
+    ConwayCell as(true);
+
+
+
 
     std::cout << name1 << std::endl;
     std::cout << y1 << " " << x1 << std::endl;    
     Life<ConwayCell> board1(y1, x1, 12); 
     board1.prepareBoard(std::cin);
+
+    board1.simulate(std::cout);
+
+
 
     // -----------------
     // Conway Cell 20x29
@@ -52,18 +60,18 @@ int main () {
     Print every 4th grid (i.e. 0, 4, 8, ... 28)
     */
 
-    // int y2;
-    // int x2;
-    // std::string name2;
-    // std::cin >> name2;
-    // std::cin >> y2;
-    // std::cin >> x2;
+    int y2;
+    int x2;
+    std::string name2;
+    std::cin >> name2;
+    std::cin >> y2;
+    std::cin >> x2;
     
 
-    // std::cout << name2 << std::endl;
-    // std::cout << y2 << " " << x2 << std::endl;    
-    // Life<ConwayCell> board2(y2, x2, 28); 
-    // board2.prepareBoard(std::cin);
+    std::cout << name2 << std::endl;
+    std::cout << y2 << " " << x2 << std::endl;    
+    Life<ConwayCell> board2(y2, x2, 28); 
+    board2.prepareBoard(std::cin);
 
 
 
