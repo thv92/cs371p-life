@@ -12,6 +12,10 @@
 #include <iostream> // cout, endl
 #include "Life.h"
 
+#define RUN_1 true
+#define RUN_2 true
+#define RUN_3 true
+#define RUN_4 true
 // ----
 // main
 // ----
@@ -40,9 +44,9 @@ int main () {
 
     std::cout << name1 << std::endl;
     std::cout << y1 << " " << x1 << std::endl;    
-    Life<ConwayCell> board1(y1, x1, 12); 
+    Life<ConwayCell> board1(y1, x1); 
     board1.prepareBoard(std::cin);
-
+    if(RUN_1)
     for(int i = 0; i <= 12; ++i){
         board1.printGrid(std::cout, i);
         board1.simulate(std::cout);
@@ -69,9 +73,10 @@ int main () {
 
     std::cout << name2 << std::endl;
     std::cout << y2 << " " << x2 << std::endl;    
-    Life<ConwayCell> board2(y2, x2, 28); 
+    Life<ConwayCell> board2(y2, x2); 
     board2.prepareBoard(std::cin);
 
+    if(RUN_2)
     for(int i = 0; i <= 28; ++i){
         if( (i == 0) || ( ( (i%4) == 0) && (i >= 4) ) ){
             board2.printGrid(std::cout, i);
@@ -95,6 +100,31 @@ int main () {
     Print the 2500th grid.
     */
 
+    int y3;
+    int x3;
+    std::string name3;
+    std::cin >> name3;
+    std::cin >> y3;
+    std::cin >> x3;
+    
+
+    std::cout << name3 << std::endl;
+    std::cout << y3 << " " << x3 << std::endl;    
+    Life<ConwayCell> board3(y3, x3); 
+    board3.prepareBoard(std::cin);
+
+    if(RUN_3)
+    for(int i = 0; i <= 2500; ++i){
+        if( i < 10 || i == 283 || i == 323 || i == 2500 ){
+            board3.printGrid(std::cout, i);
+        }
+        board3.simulate(std::cout);
+    }
+
+
+
+
+
     // ------------------
     // Fredkin Cell 20x20
     // ------------------
@@ -104,6 +134,32 @@ int main () {
     Simulate 5 evolutions.
     Print every grid (i.e. 0, 1, 2, ... 5)
     */
+
+    int y4;
+    int x4;
+    std::string name4;
+    std::cin >> name4;
+    std::cin >> y4;
+    std::cin >> x4;
+    
+
+    std::cout << name4 << std::endl;
+    std::cout << y4 << " " << x4 << std::endl;    
+    Life<FredkinCell> board4(y4, x4); 
+    board4.prepareBoard(std::cin);
+
+    if(RUN_4)
+    for(int i = 0; i <= 5; ++i){
+        board4.printGrid(std::cout, i);
+        board4.simulate(std::cout);
+    }
+
+
+
+
+
+
+
 
     // ----------
     // Cell 20x20

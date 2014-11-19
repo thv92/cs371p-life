@@ -15,13 +15,13 @@
 //--------------
 
 AbstractCell::AbstractCell(){}
-AbstractCell::AbstractCell(cell_t cellType, bool alive): _alive(alive), _cellType(cellType){}
+AbstractCell::AbstractCell(cell_t cellType, bool alive): _alive(alive), _stateToChange(_alive) , _cellType(cellType){}
 
 AbstractCell::~AbstractCell(){}
 
 bool AbstractCell::deadOrAlive(std::vector<bool> neighbors){return 0;}
 bool AbstractCell::getAlive(){return _alive;}
-
+void AbstractCell::execute(){}
 //--------------
 // Cell
 //--------------
@@ -65,11 +65,12 @@ bool ConwayCell::deadOrAlive(std::vector<bool> neighbors){
 
     if(DEBUGC)
     std::cout << "Neighbor Count: " << neighborCount << std::endl;
-
+    
     if(_alive){
         if(DEBUGC)
         std::cout << " I am alive " << std::endl;
         if(neighborCount < 2 ||  neighborCount > 3){
+            _stateToChange = false;
             return false;
         }else{
             return true;
@@ -79,11 +80,19 @@ bool ConwayCell::deadOrAlive(std::vector<bool> neighbors){
         std::cout << " I am dead " << std::endl;
 
         if(neighborCount == 3){
+            _stateToChange = true;
             return true;
         }
     }
 
     return false;
+}
+
+
+void ConwayCell::execute(){
+    if(_alive != _stateToChange){
+        _alive = _stateToChange;
+    }    
 }
 
 
@@ -93,16 +102,20 @@ bool ConwayCell::deadOrAlive(std::vector<bool> neighbors){
 // //-------------
 
 FredkinCell::FredkinCell(){}
-FredkinCell::FredkinCell(bool alive): AbstractCell(FREDKIN, alive){}
+FredkinCell::FredkinCell(bool alive): AbstractCell(FREDKIN, alive), _age(0){}
 FredkinCell::~FredkinCell(){}
 
 
 void FredkinCell::printStatus(std::ostream& w){
-    // if(_alive){
-    //     w << "*";
-    // }else{
-    //     w << ".";
-    // }
+    if(_alive){
+        if(_age < 10){
+            w << _age;
+        }else if(_age > 9){
+            w << "+";
+        }
+    }else{
+        w << "-";
+    }
  }
 
 
@@ -124,6 +137,7 @@ bool FredkinCell::deadOrAlive(std::vector<bool> neighbors){
         if(DEBUGF)
         std::cout << " I am alive " << std::endl;
         if(neighborCount == 0 ||  neighborCount == 2 || neighborCount == 4){
+            _stateToChange = false;
             return false;
         }else{
             return true;
@@ -133,9 +147,20 @@ bool FredkinCell::deadOrAlive(std::vector<bool> neighbors){
         std::cout << " I am dead " << std::endl;
 
         if(neighborCount == 1 || neighborCount == 3){
+            _stateToChange = true;
             return true;
         }
     }
 
     return false;
+}
+
+void FredkinCell::execute(){
+    if(_alive != _stateToChange){
+        _alive = _stateToChange;
+    }else if(!_alive && !_stateToChange){
+        _age = 0;
+    }else if(_alive && _stateToChange){
+        ++_age;
+    }     
 }

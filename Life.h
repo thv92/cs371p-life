@@ -34,9 +34,12 @@ class AbstractCell{
         AbstractCell(cell_t cellType, bool alive);
         virtual ~AbstractCell();
         virtual bool deadOrAlive(std::vector<bool> neighbors);
+        virtual void execute();
         bool getAlive();
+
     protected:
         bool _alive;
+        bool _stateToChange;
         cell_t _cellType;
 
 
@@ -70,8 +73,8 @@ class ConwayCell : public AbstractCell{
         ConwayCell(bool alive);
         ~ConwayCell();
         void printStatus(std::ostream& w);
-
         bool deadOrAlive(std::vector<bool> neighbors);
+        void execute();
     private:
 
 
@@ -90,7 +93,7 @@ class FredkinCell : public AbstractCell{
 
         bool deadOrAlive(std::vector<bool> neighbors);
         void printStatus(std::ostream& w);
-
+        void execute();
     private:
         int _age;
 
@@ -117,8 +120,8 @@ class Life{
          * @param y number of columns
          */
 
-        Life(const int& y, const int& x, const int& gen): 
-                    _x(x), _y(y), _size(_x*_y), _gen(gen), _pop(0), _board(x*y){}
+        Life(const int& y, const int& x): 
+                    _x(x), _y(y), _size(_x*_y), _pop(0), _board(x*y){}
 
 
         //--------------
@@ -164,29 +167,18 @@ class Life{
 
         void simulate(std::ostream& w){
 
-            // int genGone = 0;
-            // while(genGone <= _gen){
-                std::vector<T> tempBoard(_size);
-                int tempPop = 0;
-                for(int i = 0; i < _size; ++i){
-                    // std::pair<int, int> test = changeToCoord(i);
-                    // std::cout << "("<< test.first<< ", "<< test.second<<")"<<std::endl;
-                    
-                    if(_board[i].deadOrAlive(find_neighbors(i))){
-                        tempBoard[i] = T(true);
-                        ++tempPop;
-                    }else{
-                        tempBoard[i] = T(false);
-                    }
-
-                    // break;
+            int tempPop = 0;
+            for(int i = 0; i < _size; ++i){
+                bool alive = _board[i].deadOrAlive(find_neighbors(i));
+                if(alive){
+                    ++tempPop;
                 }
-                _pop = tempPop;
-                _board = tempBoard;
-                // break;   
-                // ++genGone;
-            // }
+            }
 
+            for(int i = 0; i < _size; ++i){
+                _board[i].execute();
+            }
+            _pop = tempPop;
         }
 
 
@@ -291,7 +283,6 @@ class Life{
         const int _x;
         const int _y;
         const int _size;
-        const int _gen;
         int _pop;
         std::vector<T> _board;
 
