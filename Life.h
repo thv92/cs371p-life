@@ -54,7 +54,7 @@ class AbstractCell{
 
 class Cell{
     public:
-
+        Cell(bool alive);
     private:
 
 
@@ -75,9 +75,6 @@ class ConwayCell : public AbstractCell{
         void printStatus(std::ostream& w);
         bool deadOrAlive(std::vector<bool> neighbors);
         void execute();
-    private:
-
-
 };
 
 
@@ -259,10 +256,6 @@ class Life{
             return coord.first + coord.second * _x;
         }
 
-        // index = X + Y * Width;
-        // Y = (int)(index / Width)
-        // X = index - (Y * Width)
-
         void printGrid(std::ostream& w, int gen_gone){
             w << "Generation = " << gen_gone << ", "
               << "Population = " << _pop << "." << std::endl;
@@ -287,12 +280,5 @@ class Life{
         std::vector<T> _board;
 
     };
-
-
-
-
-
-
-
 
 #endif //Life_h

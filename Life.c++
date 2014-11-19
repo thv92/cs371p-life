@@ -22,20 +22,20 @@ AbstractCell::~AbstractCell(){}
 bool AbstractCell::deadOrAlive(std::vector<bool> neighbors){return 0;}
 bool AbstractCell::getAlive(){return _alive;}
 void AbstractCell::execute(){}
+
+
 //--------------
 // Cell
 //--------------
 
-
-
+// Cell::Cell(){}
+Cell::Cell(bool alive){}
 
 
 
 //------------
 // ConwayCell
 //------------
-
-
 
 
 ConwayCell::ConwayCell(){}
