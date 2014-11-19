@@ -13,7 +13,7 @@
 
 #define DEBUGLIFE false
 #define DEBUGC false
-#define DEBUF false
+#define DEBUGF false
 
 //-------
 // enums
@@ -64,10 +64,12 @@ class Cell{
 //------------
 
 class ConwayCell : public AbstractCell{
+
     public:
         ConwayCell();
         ConwayCell(bool alive);
         ~ConwayCell();
+        void printStatus(std::ostream& w);
 
         bool deadOrAlive(std::vector<bool> neighbors);
     private:
@@ -87,6 +89,7 @@ class FredkinCell : public AbstractCell{
         ~FredkinCell();
 
         bool deadOrAlive(std::vector<bool> neighbors);
+        void printStatus(std::ostream& w);
 
     private:
         int _age;
@@ -132,13 +135,12 @@ class Life{
             for(int i = 0; i < _y; ++i){
 
                 r.ignore(80, '\n');
-
                 while((r.peek() != '\n') && (r.peek() != EOF)){
                     char k;
                     r >> k;
 
                     //dead = . | alive = something else
-                    bool alive = k == '.' ? false : true;
+                    bool alive = k == '.' || k == '-' ? false : true;
                     
                     _board[index] = T(alive);
                     
@@ -162,9 +164,8 @@ class Life{
 
         void simulate(std::ostream& w){
 
-            int genGone = 0;
-            while(genGone <= _gen){
-                printGrid(w, genGone);
+            // int genGone = 0;
+            // while(genGone <= _gen){
                 std::vector<T> tempBoard(_size);
                 int tempPop = 0;
                 for(int i = 0; i < _size; ++i){
@@ -183,8 +184,8 @@ class Life{
                 _pop = tempPop;
                 _board = tempBoard;
                 // break;   
-                ++genGone;
-            }
+                // ++genGone;
+            // }
 
         }
 
@@ -273,18 +274,10 @@ class Life{
         void printGrid(std::ostream& w, int gen_gone){
             w << "Generation = " << gen_gone << ", "
               << "Population = " << _pop << "." << std::endl;
-            
-
             int i = 0;
             while(i < _size){
                 for(int col = 0; col < _x; ++col){
-                    ConwayCell &k = _board[i];
-
-                    if(k.getAlive()) {
-                        w << "*";
-                    }else{
-                        w << ".";
-                    }
+                     _board[i].printStatus(w);
                     ++i;
                 }
                 w << std::endl;

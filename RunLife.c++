@@ -36,9 +36,6 @@ int main () {
     std::cin >> y1;
     std::cin >> x1;
     
-    ConwayCell as(true);
-
-
 
 
     std::cout << name1 << std::endl;
@@ -46,8 +43,10 @@ int main () {
     Life<ConwayCell> board1(y1, x1, 12); 
     board1.prepareBoard(std::cin);
 
-    board1.simulate(std::cout);
-
+    for(int i = 0; i <= 12; ++i){
+        board1.printGrid(std::cout, i);
+        board1.simulate(std::cout);
+    }
 
 
     // -----------------
@@ -73,6 +72,12 @@ int main () {
     Life<ConwayCell> board2(y2, x2, 28); 
     board2.prepareBoard(std::cin);
 
+    for(int i = 0; i <= 28; ++i){
+        if( (i == 0) || ( ( (i%4) == 0) && (i >= 4) ) ){
+            board2.printGrid(std::cout, i);
+        }
+        board2.simulate(std::cout);
+    }
 
 
     // ------------------

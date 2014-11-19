@@ -35,9 +35,21 @@ bool AbstractCell::getAlive(){return _alive;}
 // ConwayCell
 //------------
 
+
+
+
 ConwayCell::ConwayCell(){}
 ConwayCell::ConwayCell(bool alive): AbstractCell(CONWAY, alive){}
 ConwayCell::~ConwayCell(){}
+
+
+ void ConwayCell::printStatus(std::ostream& w){
+    if(_alive){
+        w << "*";
+    }else{
+        w << ".";
+    }
+ }
 
 bool ConwayCell::deadOrAlive(std::vector<bool> neighbors){
     int neighborCount = 0;
@@ -83,6 +95,17 @@ bool ConwayCell::deadOrAlive(std::vector<bool> neighbors){
 FredkinCell::FredkinCell(){}
 FredkinCell::FredkinCell(bool alive): AbstractCell(FREDKIN, alive){}
 FredkinCell::~FredkinCell(){}
+
+
+void FredkinCell::printStatus(std::ostream& w){
+    // if(_alive){
+    //     w << "*";
+    // }else{
+    //     w << ".";
+    // }
+ }
+
+
 
 
 bool FredkinCell::deadOrAlive(std::vector<bool> neighbors){
