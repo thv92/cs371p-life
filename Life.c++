@@ -21,16 +21,9 @@ AbstractCell::~AbstractCell(){}
 
 bool AbstractCell::deadOrAlive(std::vector<bool> neighbors){return 0;}
 bool AbstractCell::getAlive(){return _alive;}
+void AbstractCell::printStatus(std::ostream& w){}
 void AbstractCell::execute(){}
-
-
-//--------------
-// Cell
-//--------------
-
-// Cell::Cell(){}
-Cell::Cell(bool alive){}
-
+void AbstractCell::d(){}
 
 
 //------------
@@ -97,9 +90,9 @@ void ConwayCell::execute(){
 
 
 
-// //-------------
-// // FredkinCell
-// //-------------
+//-------------
+// FredkinCell
+//-------------
 
 FredkinCell::FredkinCell(){}
 FredkinCell::FredkinCell(bool alive): AbstractCell(FREDKIN, alive), _age(0){}
@@ -118,6 +111,15 @@ void FredkinCell::printStatus(std::ostream& w){
     }
  }
 
+int FredkinCell::amITwoYears(){
+    if(_age < 2){
+        return -1;
+    }else if(_age == 2){
+        return 0;
+    }else{
+        return 1;
+    }
+}
 
 
 
@@ -158,9 +160,47 @@ bool FredkinCell::deadOrAlive(std::vector<bool> neighbors){
 void FredkinCell::execute(){
     if(_alive != _stateToChange){
         _alive = _stateToChange;
-    }else if(!_alive && !_stateToChange){
-        _age = 0;
     }else if(_alive && _stateToChange){
         ++_age;
     }     
 }
+
+
+//--------------
+// Cell
+//--------------
+
+Cell::Cell(){}
+Cell::Cell(bool alive){
+    p = new FredkinCell(alive);
+}
+
+
+bool Cell::deadOrAlive(std::vector<bool> neighbors){
+   return p->deadOrAlive(neighbors);
+}
+
+void Cell::execute(){
+    p->execute();
+    if(p->getAlive()){
+        if(FredkinCell* f = dynamic_cast<FredkinCell*>(p) ){
+            if(f->amITwoYears() == 0){
+                delete p;
+                p = new ConwayCell(true);
+            }
+        }
+    }
+}
+
+bool Cell::getAlive(){
+    return p->getAlive();
+}
+
+void Cell::printStatus(std::ostream& w){
+    p->printStatus(w);
+}
+
+
+Cell::~Cell(){}
+
+void Cell::d(){delete p;}

@@ -21,7 +21,6 @@
 
 enum cell_t {CONWAY, FREDKIN, IDK};
 enum dir_t {N, NE, E, SE, S, SW, W, NW};
-enum da_t {DEAD, ALIVE};
 
 
 //--------------
@@ -35,27 +34,15 @@ class AbstractCell{
         virtual ~AbstractCell();
         virtual bool deadOrAlive(std::vector<bool> neighbors);
         virtual void execute();
+        virtual void printStatus(std::ostream& w);
         bool getAlive();
+        void d();
 
     protected:
         bool _alive;
         bool _stateToChange;
         cell_t _cellType;
 
-
-
-};
-
-
-
-//-------
-// Cell
-//-------
-
-class Cell{
-    public:
-        Cell(bool alive);
-    private:
 
 
 };
@@ -88,11 +75,33 @@ class FredkinCell : public AbstractCell{
         FredkinCell(bool alive);
         ~FredkinCell();
 
+        int amITwoYears();
         bool deadOrAlive(std::vector<bool> neighbors);
         void printStatus(std::ostream& w);
         void execute();
     private:
         int _age;
+
+};
+
+
+
+//-------
+// Cell
+//-------
+
+class Cell{
+    public:
+        Cell();
+        Cell(bool alive);
+        bool deadOrAlive(std::vector<bool> neighbors);
+        bool getAlive();        
+        void printStatus(std::ostream& w);
+        void execute();
+        ~Cell();
+        void d();
+    private:
+        AbstractCell* p;
 
 };
 
@@ -257,6 +266,10 @@ class Life{
         }
 
         void printGrid(std::ostream& w, int gen_gone){
+            if(gen_gone == 0){
+                w << std::endl;
+            }
+
             w << "Generation = " << gen_gone << ", "
               << "Population = " << _pop << "." << std::endl;
             int i = 0;
@@ -270,6 +283,10 @@ class Life{
             w << std::endl;
         }
 
+        void del(){
+            for(int i = 0; i < _size; i++)
+                _board[i].d();
+        }
 
 
     private:

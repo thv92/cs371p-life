@@ -16,6 +16,8 @@
 #define RUN_2 true
 #define RUN_3 true
 #define RUN_4 true
+#define RUN_5 true
+
 // ----
 // main
 // ----
@@ -42,8 +44,8 @@ int main () {
     
 
 
-    std::cout << name1 << std::endl;
-    std::cout << y1 << " " << x1 << std::endl;    
+    // std::cout << name1 << std::endl;
+    // std::cout << y1 << " " << x1 << std::endl;    
     Life<ConwayCell> board1(y1, x1); 
     board1.prepareBoard(std::cin);
     if(RUN_1)
@@ -71,8 +73,8 @@ int main () {
     std::cin >> x2;
     
 
-    std::cout << name2 << std::endl;
-    std::cout << y2 << " " << x2 << std::endl;    
+    // std::cout << name2 << std::endl;
+    // std::cout << y2 << " " << x2 << std::endl;    
     Life<ConwayCell> board2(y2, x2); 
     board2.prepareBoard(std::cin);
 
@@ -108,8 +110,8 @@ int main () {
     std::cin >> x3;
     
 
-    std::cout << name3 << std::endl;
-    std::cout << y3 << " " << x3 << std::endl;    
+    // std::cout << name3 << std::endl;
+    // std::cout << y3 << " " << x3 << std::endl;    
     Life<ConwayCell> board3(y3, x3); 
     board3.prepareBoard(std::cin);
 
@@ -143,8 +145,8 @@ int main () {
     std::cin >> x4;
     
 
-    std::cout << name4 << std::endl;
-    std::cout << y4 << " " << x4 << std::endl;    
+    // std::cout << name4 << std::endl;
+    // std::cout << y4 << " " << x4 << std::endl;    
     Life<FredkinCell> board4(y4, x4); 
     board4.prepareBoard(std::cin);
 
@@ -170,5 +172,29 @@ int main () {
     Simulate 5 evolutions.
     Print every grid (i.e. 0, 1, 2, ... 5)
     */
+
+    int y5;
+    int x5;
+    std::string name5;
+    std::cin >> name5;
+    std::cin >> y5;
+    std::cin >> x5;
+    
+
+    // std::cout << name5 << std::endl;
+    // std::cout << y5 << " " << x5 << std::endl;    
+    Life<Cell> board5(y5, x5); 
+    board5.prepareBoard(std::cin);
+
+    if(RUN_5)
+    for(int i = 0; i <= 5; ++i){
+        board5.printGrid(std::cout, i);
+        board5.simulate(std::cout);
+    }
+
+    board5.del();
+
+
+
 
     return 0;}
