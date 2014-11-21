@@ -193,6 +193,7 @@ Cell& Cell::operator=(const Cell& other){
 
     delete p;
     p = other.p->clone();
+    return *this;
 }
 
 bool Cell::deadOrAlive(std::vector<bool> neighbors){
