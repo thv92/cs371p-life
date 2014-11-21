@@ -36,7 +36,7 @@ class AbstractCell{
         virtual void execute();
         virtual void printStatus(std::ostream& w);
         bool getAlive();
-        void d();
+        virtual AbstractCell* clone() = 0;
 
     protected:
         bool _alive;
@@ -62,6 +62,7 @@ class ConwayCell : public AbstractCell{
         void printStatus(std::ostream& w);
         bool deadOrAlive(std::vector<bool> neighbors);
         void execute();
+        ConwayCell* clone();
 };
 
 
@@ -79,6 +80,7 @@ class FredkinCell : public AbstractCell{
         bool deadOrAlive(std::vector<bool> neighbors);
         void printStatus(std::ostream& w);
         void execute();
+        FredkinCell* clone();
     private:
         int _age;
 
@@ -94,12 +96,14 @@ class Cell{
     public:
         Cell();
         Cell(bool alive);
+        Cell(const Cell& other);
+        Cell& operator=(const Cell& other);
+
         bool deadOrAlive(std::vector<bool> neighbors);
         bool getAlive();        
         void printStatus(std::ostream& w);
         void execute();
         ~Cell();
-        void d();
     private:
         AbstractCell* p;
 
@@ -281,11 +285,6 @@ class Life{
                 w << std::endl;
             }
             w << std::endl;
-        }
-
-        void del(){
-            for(int i = 0; i < _size; i++)
-                _board[i].d();
         }
 
 

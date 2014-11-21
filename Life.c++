@@ -23,7 +23,9 @@ bool AbstractCell::deadOrAlive(std::vector<bool> neighbors){return 0;}
 bool AbstractCell::getAlive(){return _alive;}
 void AbstractCell::printStatus(std::ostream& w){}
 void AbstractCell::execute(){}
-void AbstractCell::d(){}
+AbstractCell* AbstractCell::clone() {
+    return NULL;
+}
 
 
 //------------
@@ -35,6 +37,9 @@ ConwayCell::ConwayCell(){}
 ConwayCell::ConwayCell(bool alive): AbstractCell(CONWAY, alive){}
 ConwayCell::~ConwayCell(){}
 
+ConwayCell* ConwayCell::clone(){
+    return new ConwayCell(*this);
+}
 
  void ConwayCell::printStatus(std::ostream& w){
     if(_alive){
@@ -97,7 +102,9 @@ void ConwayCell::execute(){
 FredkinCell::FredkinCell(){}
 FredkinCell::FredkinCell(bool alive): AbstractCell(FREDKIN, alive), _age(0){}
 FredkinCell::~FredkinCell(){}
-
+FredkinCell* FredkinCell::clone(){
+    return new FredkinCell(*this);
+}
 
 void FredkinCell::printStatus(std::ostream& w){
     if(_alive){
@@ -175,6 +182,18 @@ Cell::Cell(bool alive){
     p = new FredkinCell(alive);
 }
 
+Cell::Cell(const Cell& other): p(other.p->clone()){}
+
+Cell::~Cell(){delete p;}
+
+Cell& Cell::operator=(const Cell& other){
+    if(this == &other){
+        return *this;
+    }
+
+    delete p;
+    p = other.p->clone();
+}
 
 bool Cell::deadOrAlive(std::vector<bool> neighbors){
    return p->deadOrAlive(neighbors);
@@ -201,6 +220,4 @@ void Cell::printStatus(std::ostream& w){
 }
 
 
-Cell::~Cell(){}
 
-void Cell::d(){delete p;}

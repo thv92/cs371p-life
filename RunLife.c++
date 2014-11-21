@@ -192,7 +192,7 @@ int main () {
         board5.simulate(std::cout);
     }
 
-    board5.del();
+    // board5.del();
 
 
 
