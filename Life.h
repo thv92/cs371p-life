@@ -452,6 +452,8 @@ class Life{
         void prepareBoard(std::istream& r){
             int index = 0;
             for(int i = 0; i < _y; ++i){
+                std::vector<T> temp;
+                _board.push_back(temp);
 
                 r.ignore(80, '\n');
                 while((r.peek() != '\n') && (r.peek() != EOF)){
@@ -461,8 +463,7 @@ class Life{
                     //dead = . | alive = something else
                     bool alive = k == '.' || k == '-' ? false : true;
                     
-                    _board.push_back(T(alive));
-                    
+                    _board[i].push_back(T(alive));
                     if(alive){
                         ++_pop;
                     }
@@ -485,15 +486,20 @@ class Life{
         void simulate(std::ostream& w){
 
             int tempPop = 0;
-            for(int i = 0; i < _size; ++i){
-                bool alive = _board[i].deadOrAlive(find_neighbors(i, _board[i].diag()));
-                if(alive){
-                    ++tempPop;
+            for(int i = 0; i < _y; ++i){
+                for(int j=0; j < _x; ++j){
+
+                    bool alive = _board[i][j].deadOrAlive(find_neighbors(i, j, _board[i][j].diag()));
+                    if(alive){
+                        ++tempPop;
+                    }
                 }
             }
 
-            for(int i = 0; i < _size; ++i){
-                _board[i].execute();
+            for(int i = 0; i < _y; ++i){
+                for(int j=0; j < _x; ++j){
+                    _board[i][j].execute();
+                }
             }
             _pop = tempPop;
             ++_gen_gone;
@@ -510,13 +516,13 @@ class Life{
          * @return vector of 8 neighbors of current cell
          */
 
-        int find_neighbors(int pos, bool needDiagonal){
+        int find_neighbors(int row, int col, bool needDiagonal){
             int neighbors = 0;
             if(needDiagonal)
-                neighbors += statusOfNeighbor(pos, NE) + statusOfNeighbor(pos, SE) + 
-                           statusOfNeighbor(pos, SW) + statusOfNeighbor(pos, NW);
-            neighbors += statusOfNeighbor(pos, N) + statusOfNeighbor(pos, E) +
-                         statusOfNeighbor(pos, S) + statusOfNeighbor(pos, W);
+                neighbors += statusOfNeighbor(row, col, NE) + statusOfNeighbor(row, col, SE) + 
+                           statusOfNeighbor(row, col, SW) + statusOfNeighbor(row, col, NW);
+            neighbors += statusOfNeighbor(row, col, N) + statusOfNeighbor(row, col, E) +
+                         statusOfNeighbor(row, col, S) + statusOfNeighbor(row, col, W);
             return neighbors;
         }
 
@@ -531,48 +537,46 @@ class Life{
          * @return state of specified neighbor 
          */
 
-        bool statusOfNeighbor(int pos, dir_t dir){
-            std::pair<int, int> curCoord = changeToCoord(pos);
-
-            int n_col = curCoord.first;
-            int n_row = curCoord.second;
+        bool statusOfNeighbor(int row, int col, dir_t dir){
+            int n_col = col;
+            int n_row = row;
 
             switch(dir) {
                 case N:
-                    n_row = curCoord.second - 1;
+                    n_row = row - 1;
                     break;
                 case NE:
-                    n_row = curCoord.second - 1;
-                    n_col = curCoord.first + 1;
+                    n_row = row - 1;
+                    n_col = col + 1;
                     break;
                 case E:
-                    n_col = curCoord.first + 1;
+                    n_col = col + 1;
                     break;
                 case SE:
-                    n_row = curCoord.second + 1;
-                    n_col = curCoord.first + 1;
+                    n_row = row + 1;
+                    n_col = col + 1;
                     break;
                 case S:
-                    n_row = curCoord.second + 1;
+                    n_row = row + 1;
                     break;
                 case SW:
-                    n_row = curCoord.second + 1;
-                    n_col = curCoord.first - 1;
+                    n_row = row + 1;
+                    n_col = col - 1;
                     break;
                 case W:
-                    n_col = curCoord.first - 1;
+                    n_col = col - 1;
                     break;
                 case NW:
-                    n_row = curCoord.second - 1;
-                    n_col = curCoord.first - 1;
+                    n_row = row - 1;
+                    n_col = col - 1;
                     break;
             }
 
 
-            if(outOfBounds(std::pair<int, int>(n_col, n_row))){
+            if(outOfBounds(n_row, n_col)){
                 return false;
             }
-            return _board[changeToPos(std::pair<int, int>(n_col, n_row))].getAlive();
+            return _board[n_row][n_col].getAlive();
         }
 
         //--------------
@@ -585,41 +589,11 @@ class Life{
          * @return true if out of bounds
          */
 
-        bool outOfBounds(std::pair<int, int> coord){
-            int col = coord.first;
-            int row = coord.second;
+        bool outOfBounds(int rowToCheck, int colToCheck){
+            int col = colToCheck;
+            int row = rowToCheck;
             return row < 0 || row >= _y || col < 0 || col >= _x;
 
-        }
-
-        //---------------
-        // changeToCoord
-        //---------------
-
-        /**
-         * change from 1d array index to 2d array index
-         * @param pos int 1d array index
-         * @return pair 2d array index
-         */
-
-        std::pair<int, int> changeToCoord(int pos){
-            int row = pos/_x;
-            int col = pos - (row * _x);
-            return std::pair<int,int>(col, row);
-        }
-
-        //---------------
-        // changeToPos
-        //---------------
-
-        /**
-         * change from 2d array index to 1d array index
-         * @param pair 2d array index 
-         * @return int 1d array index
-         */
-
-        int changeToPos(std::pair<int, int> coord){
-            return coord.first + coord.second * _x;
         }
 
         //------------
@@ -639,11 +613,9 @@ class Life{
 
             w << "Generation = " << _gen_gone << ", "
               << "Population = " << _pop << "." << std::endl;
-            int i = 0;
-            while(i < _size){
-                for(int col = 0; col < _x; ++col){
-                     _board[i].printStatus(w);
-                    ++i;
+            for(int i = 0; i < _y; ++i){
+                for(int j = 0; j < _x; ++j){
+                     _board[i][j].printStatus(w);
                 }
                 w << std::endl;
             }
@@ -660,7 +632,7 @@ class Life{
         const int _total_turns; //total generations
         int _gen_gone;           //generations gone by
         int _pop;               //population
-        std::vector<T> _board;  //board of cells
+        std::vector<std::vector<T>> _board;  //board of cells
 
     };
 
