@@ -19,7 +19,7 @@ AbstractCell::AbstractCell(cell_t cellType, bool alive): _alive(alive), _stateTo
 
 AbstractCell::~AbstractCell(){}
 bool AbstractCell::diag(){return false;}
-bool AbstractCell::deadOrAlive(std::pair<int, int> neighbors){return 0;}
+bool AbstractCell::deadOrAlive(int neighbors){return 0;}
 bool AbstractCell::getAlive(){return _alive;}
 void AbstractCell::printStatus(std::ostream& w){}
 void AbstractCell::execute(){}
@@ -49,17 +49,16 @@ ConwayCell* ConwayCell::clone(){
     }
  }
 
-bool ConwayCell::deadOrAlive(std::pair<int, int> neighbors){
-    int neighborCount = neighbors.first + neighbors.second;
+bool ConwayCell::deadOrAlive(int neighbors){
     if(_alive){
-        if(neighborCount < 2 ||  neighborCount > 3){
+        if(neighbors < 2 ||  neighbors > 3){
             _stateToChange = false;
             return false;
         }else{
             return true;
         }
     }else{
-        if(neighborCount == 3){
+        if(neighbors == 3){
             _stateToChange = true;
             return true;
         }
@@ -114,17 +113,16 @@ int FredkinCell::amITwoYears(){
 
 
 
-bool FredkinCell::deadOrAlive(std::pair<int, int> neighbors){
-    int neighborCount = neighbors.first;
+bool FredkinCell::deadOrAlive(int neighbors){
     if(_alive){
-        if(neighborCount == 0 ||  neighborCount == 2 || neighborCount == 4){
+        if(neighbors == 0 ||  neighbors == 2 || neighbors == 4){
             _stateToChange = false;
             return false;
         }else{
             return true;
         }
     }else{
-        if(neighborCount == 1 || neighborCount == 3){
+        if(neighbors == 1 || neighbors == 3){
             _stateToChange = true;
             return true;
         }
@@ -163,7 +161,7 @@ Cell& Cell::operator=(Cell other){
     return *this;
 }
 
-bool Cell::deadOrAlive(std::pair<int, int> neighbors){
+bool Cell::deadOrAlive(int neighbors){
    return p->deadOrAlive(neighbors);
 }
 

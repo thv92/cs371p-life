@@ -63,7 +63,7 @@ class AbstractCell{
          * @return dead or alive 
          */
 
-        virtual bool deadOrAlive(std::pair<int, int> neighbors);
+        virtual bool deadOrAlive(int neighbors);
         
         //---------
         // execute
@@ -184,7 +184,7 @@ class ConwayCell : public AbstractCell{
          * @return dead or alive 
          */
 
-        bool deadOrAlive(std::pair<int, int> neighbors);
+        bool deadOrAlive(int neighbors);
        
         //---------
         // execute
@@ -250,7 +250,7 @@ class FredkinCell : public AbstractCell{
          * @param neighbors vector of neighbors around current cell
          * @return dead or alive 
          */
-        bool deadOrAlive(std::pair<int, int> neighbors);
+        bool deadOrAlive(int neighbors);
         
         //-------
         // diag
@@ -358,7 +358,7 @@ class Cell{
          * @return dead or alive 
          */
 
-        bool deadOrAlive(std::pair<int, int> neighbors);
+        bool deadOrAlive(int neighbors);
       
 
         //--------------
@@ -509,15 +509,14 @@ class Life{
          * @return vector of 8 neighbors of current cell
          */
 
-        std::pair<int, int> find_neighbors(int pos, bool needDiagonal){
-            int diag = 0;
-            int normal = 0;
+        int find_neighbors(int pos, bool needDiagonal){
+            int neighbors = 0;
             if(needDiagonal)
-                diag = statusOfNeighbor(pos, NE) + statusOfNeighbor(pos, SE) + 
+                neighbors += statusOfNeighbor(pos, NE) + statusOfNeighbor(pos, SE) + 
                            statusOfNeighbor(pos, SW) + statusOfNeighbor(pos, NW);
-            normal = statusOfNeighbor(pos, N) + statusOfNeighbor(pos, E) +
+            neighbors += statusOfNeighbor(pos, N) + statusOfNeighbor(pos, E) +
                          statusOfNeighbor(pos, S) + statusOfNeighbor(pos, W);
-            return std::pair<int, int>(normal, diag);
+            return neighbors;
         }
 
         //------------------
