@@ -63,7 +63,7 @@ class AbstractCell{
          * @return dead or alive 
          */
 
-        virtual bool deadOrAlive(std::vector<bool> neighbors);
+        virtual bool deadOrAlive(std::pair<int, int> neighbors);
         
         //---------
         // execute
@@ -173,7 +173,7 @@ class ConwayCell : public AbstractCell{
          * @return dead or alive 
          */
 
-        bool deadOrAlive(std::vector<bool> neighbors);
+        bool deadOrAlive(std::pair<int, int> neighbors);
        
         //---------
         // execute
@@ -228,7 +228,7 @@ class FredkinCell : public AbstractCell{
          * @param neighbors vector of neighbors around current cell
          * @return dead or alive 
          */
-        bool deadOrAlive(std::vector<bool> neighbors);
+        bool deadOrAlive(std::pair<int, int> neighbors);
         
         void printStatus(std::ostream& w);
         void execute();
@@ -284,7 +284,7 @@ class Cell{
          * @param other object to copy
          */
 
-        Cell& operator=(const Cell& other);
+        Cell& operator=(Cell other);
 
         //--------------
         // deadOrAlive
@@ -296,7 +296,7 @@ class Cell{
          * @return dead or alive 
          */
 
-        bool deadOrAlive(std::vector<bool> neighbors);
+        bool deadOrAlive(std::pair<int, int> neighbors);
       
 
         //--------------
@@ -364,7 +364,7 @@ class Life{
          */
 
         Life(const int& y, const int& x): 
-                    _x(x), _y(y), _size(_x*_y), _pop(0), _board(x*y){}
+                    _x(x), _y(y), _size(_x*_y), _pop(0){}
 
 
         //--------------
@@ -388,7 +388,7 @@ class Life{
                     //dead = . | alive = something else
                     bool alive = k == '.' || k == '-' ? false : true;
                     
-                    _board[index] = T(alive);
+                    _board.push_back(T(alive));
                     
                     if(alive){
                         ++_pop;
@@ -436,17 +436,21 @@ class Life{
          * @return vector of 8 neighbors of current cell
          */
 
-        std::vector<bool> find_neighbors(int pos){
-            std::vector<bool> n;
-            n.push_back(statusOfNeighbor(pos, N));
-            n.push_back(statusOfNeighbor(pos, NE));
-            n.push_back(statusOfNeighbor(pos, E));
-            n.push_back(statusOfNeighbor(pos, SE));
-            n.push_back(statusOfNeighbor(pos, S));
-            n.push_back(statusOfNeighbor(pos, SW));
-            n.push_back(statusOfNeighbor(pos, W));
-            n.push_back(statusOfNeighbor(pos, NW));
-            return n;
+        std::pair<int, int> find_neighbors(int pos){
+            // std::pair<int, int> n;
+            int diag = statusOfNeighbor(pos, NE) + statusOfNeighbor(pos, SE) + 
+                       statusOfNeighbor(pos, SW) + statusOfNeighbor(pos, NW);
+            int normal = statusOfNeighbor(pos, N) + statusOfNeighbor(pos, E) +
+                         statusOfNeighbor(pos, S) + statusOfNeighbor(pos, W);
+            // n.push_back(statusOfNeighbor(pos, N));
+            // n.push_back(statusOfNeighbor(pos, NE));
+            // n.push_back(statusOfNeighbor(pos, E));
+            // n.push_back(statusOfNeighbor(pos, SE));
+            // n.push_back(statusOfNeighbor(pos, S));
+            // n.push_back(statusOfNeighbor(pos, SW));
+            // n.push_back(statusOfNeighbor(pos, W));
+            // n.push_back(statusOfNeighbor(pos, NW));
+            return std::pair<int, int>(normal, diag);
         }
 
         //------------------

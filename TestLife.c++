@@ -35,7 +35,8 @@ TEST(FredkinCell, test_fredkin_constructor_2){
 
 
 TEST(Cell, test_cell_constructor_1){
-    
+    Cell k(true);
+    ASSERT_EQ(k.getAlive(), true);
 }
 
 

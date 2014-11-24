@@ -19,7 +19,7 @@ AbstractCell::AbstractCell(cell_t cellType, bool alive): _alive(alive), _stateTo
 
 AbstractCell::~AbstractCell(){}
 
-bool AbstractCell::deadOrAlive(std::vector<bool> neighbors){return 0;}
+bool AbstractCell::deadOrAlive(std::pair<int, int> neighbors){return 0;}
 bool AbstractCell::getAlive(){return _alive;}
 void AbstractCell::printStatus(std::ostream& w){}
 void AbstractCell::execute(){}
@@ -49,19 +49,8 @@ ConwayCell* ConwayCell::clone(){
     }
  }
 
-bool ConwayCell::deadOrAlive(std::vector<bool> neighbors){
-    int neighborCount = 0;
-
-    for(int i = 0; i < (int) neighbors.size(); ++i){
-        if(neighbors[i]){
-            ++neighborCount;
-        }
-        if(neighborCount > 3){
-            break;
-        }
-    }
-
-    
+bool ConwayCell::deadOrAlive(std::pair<int, int> neighbors){
+    int neighborCount = neighbors.first + neighbors.second;
     if(_alive){
         if(neighborCount < 2 ||  neighborCount > 3){
             _stateToChange = false;
@@ -123,15 +112,8 @@ int FredkinCell::amITwoYears(){
 
 
 
-bool FredkinCell::deadOrAlive(std::vector<bool> neighbors){
-    int neighborCount = 0;
-
-    for(int i = 0; i < (int) neighbors.size(); ++i){
-        if(((i%2) == 0) && neighbors[i]){
-            ++neighborCount;
-        }
-    }
-
+bool FredkinCell::deadOrAlive(std::pair<int, int> neighbors){
+    int neighborCount = neighbors.first;
     if(_alive){
         if(neighborCount == 0 ||  neighborCount == 2 || neighborCount == 4){
             _stateToChange = false;
@@ -171,17 +153,13 @@ Cell::Cell(const Cell& other): p(other.p->clone()){}
 
 Cell::~Cell(){delete p;}
 
-Cell& Cell::operator=(const Cell& other){
-    if(this == &other){
-        return *this;
-    }
-
-    delete p;
-    p = other.p->clone();
+Cell& Cell::operator=(Cell other){
+    std::cout << " here " << std::endl;
+    std::swap((*this).p, other.p);
     return *this;
 }
 
-bool Cell::deadOrAlive(std::vector<bool> neighbors){
+bool Cell::deadOrAlive(std::pair<int, int> neighbors){
    return p->deadOrAlive(neighbors);
 }
 
