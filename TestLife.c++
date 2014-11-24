@@ -34,10 +34,17 @@ TEST(FredkinCell, test_fredkin_constructor_2){
     ASSERT_EQ(k.getAlive(), false);
 }
 
+TEST(FredkinCell, test_fredkin_constructor_3){
+    FredkinCell k(true);
+    std::ostringstream w;
+    ASSERT_EQ(k.getAlive(), true);
+    k.printStatus(w);
+    ASSERT_EQ(w.str(), "0");
+}
 
 TEST(Cell, test_cell_constructor_1){
     Cell k(true);
-    ASSERT_EQ(k.getAlive(), true);
+    ASSERT_EQ(FredkinCell::k.getAlive(), true);
 }
 
 
