@@ -39,10 +39,10 @@ int main () {
     
 
 
-    Life<ConwayCell> board1(y1, x1); 
+    Life<ConwayCell> board1(y1, x1, 12); 
     board1.prepareBoard(std::cin);
     for(int i = 0; i <= 12; ++i){
-        board1.printGrid(std::cout, i);
+        board1.printGrid(std::cout);
         board1.simulate(std::cout);
     }
 
@@ -51,7 +51,7 @@ int main () {
     // Conway Cell 20x29
     // -----------------
 
-    cout << "*** Life<ConwayCell> 20x29 ***" << endl;
+    cout << "\n*** Life<ConwayCell> 20x29 ***" << endl;
     /*
     Simulate 28 evolutions.
     Print every 4th grid (i.e. 0, 4, 8, ... 28)
@@ -65,11 +65,11 @@ int main () {
     std::cin >> x2;
     
 
-    Life<ConwayCell> board2(y2, x2); 
+    Life<ConwayCell> board2(y2, x2, 28); 
     board2.prepareBoard(std::cin);
     for(int i = 0; i <= 28; ++i){
         if( (i == 0) || ( ( (i%4) == 0) && (i >= 4) ) ){
-            board2.printGrid(std::cout, i);
+            board2.printGrid(std::cout);
         }
         board2.simulate(std::cout);
     }
@@ -79,7 +79,7 @@ int main () {
     // Conway Cell 109x69
     // ------------------
 
-    cout << "*** Life<ConwayCell> 109x69 ***" << endl;
+    cout << "\n*** Life<ConwayCell> 109x69 ***" << endl;
     /*
     Simulate 283 evolutions.
     Print the first 10 grids (i.e. 0, 1, 2, ... 9).
@@ -98,11 +98,11 @@ int main () {
     std::cin >> x3;
     
 
-    Life<ConwayCell> board3(y3, x3); 
+    Life<ConwayCell> board3(y3, x3, 2500); 
     board3.prepareBoard(std::cin);
     for(int i = 0; i <= 2500; ++i){
         if( i < 10 || i == 283 || i == 323 || i == 2500 ){
-            board3.printGrid(std::cout, i);
+            board3.printGrid(std::cout);
         }
         board3.simulate(std::cout);
     }
@@ -115,7 +115,7 @@ int main () {
     // Fredkin Cell 20x20
     // ------------------
 
-    cout << "*** Life<FredkinCell> 20x20 ***" << endl;
+    cout << "\n*** Life<FredkinCell> 20x20 ***" << endl;
     /*
     Simulate 5 evolutions.
     Print every grid (i.e. 0, 1, 2, ... 5)
@@ -129,10 +129,10 @@ int main () {
     std::cin >> x4;
     
 
-    Life<FredkinCell> board4(y4, x4); 
+    Life<FredkinCell> board4(y4, x4, 5); 
     board4.prepareBoard(std::cin);
     for(int i = 0; i <= 5; ++i){
-        board4.printGrid(std::cout, i);
+        board4.printGrid(std::cout);
         board4.simulate(std::cout);
     }
 
@@ -147,7 +147,7 @@ int main () {
     // Cell 20x20
     // ----------
 
-    cout << "*** Life<Cell> 20x20 ***" << endl;
+    cout << "\n*** Life<Cell> 20x20 ***" << endl;
     /*
     Simulate 5 evolutions.
     Print every grid (i.e. 0, 1, 2, ... 5)
@@ -160,10 +160,10 @@ int main () {
     std::cin >> y5;
     std::cin >> x5;
     
-    Life<Cell> board5(y5, x5); 
+    Life<Cell> board5(y5, x5, 5); 
     board5.prepareBoard(std::cin);
     for(int i = 0; i <= 5; ++i){
-        board5.printGrid(std::cout, i);
+        board5.printGrid(std::cout);
         board5.simulate(std::cout);
     }
 

@@ -436,8 +436,8 @@ class Life{
          * @param y number of columns
          */
 
-        Life(const int& y, const int& x): 
-                    _x(x), _y(y), _size(_x*_y), _pop(0){}
+        Life(const int& y, const int& x, const int& total_turns): 
+                    _x(x), _y(y), _size(_x*_y), _total_turns(total_turns), _gen_gone(0), _pop(0){}
 
 
         //--------------
@@ -496,6 +496,7 @@ class Life{
                 _board[i].execute();
             }
             _pop = tempPop;
+            ++_gen_gone;
         }
 
 
@@ -631,12 +632,12 @@ class Life{
          * @param gen_gone int generations gone by
          */
 
-        void printGrid(std::ostream& w, int gen_gone){
-            if(gen_gone == 0){
+        void printGrid(std::ostream& w){
+            if(_gen_gone == 0){
                 w << std::endl;
             }
 
-            w << "Generation = " << gen_gone << ", "
+            w << "Generation = " << _gen_gone << ", "
               << "Population = " << _pop << "." << std::endl;
             int i = 0;
             while(i < _size){
@@ -646,16 +647,20 @@ class Life{
                 }
                 w << std::endl;
             }
-            w << std::endl;
+            if(_gen_gone < _total_turns){
+                w << std::endl;
+            }
         }
 
 
     private:
         const int _x;
         const int _y;
-        const int _size;       //total size of _board
-        int _pop;              //population
-        std::vector<T> _board; //board of cells
+        const int _size;        //total size of _board
+        const int _total_turns; //total generations
+        int _gen_gone;           //generations gone by
+        int _pop;               //population
+        std::vector<T> _board;  //board of cells
 
     };
 
