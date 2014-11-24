@@ -61,12 +61,8 @@ bool ConwayCell::deadOrAlive(std::vector<bool> neighbors){
         }
     }
 
-    if(DEBUGC)
-    std::cout << "Neighbor Count: " << neighborCount << std::endl;
     
     if(_alive){
-        if(DEBUGC)
-        std::cout << " I am alive " << std::endl;
         if(neighborCount < 2 ||  neighborCount > 3){
             _stateToChange = false;
             return false;
@@ -74,9 +70,6 @@ bool ConwayCell::deadOrAlive(std::vector<bool> neighbors){
             return true;
         }
     }else{
-        if(DEBUGC)
-        std::cout << " I am dead " << std::endl;
-
         if(neighborCount == 3){
             _stateToChange = true;
             return true;
@@ -139,12 +132,7 @@ bool FredkinCell::deadOrAlive(std::vector<bool> neighbors){
         }
     }
 
-    if(DEBUGF)
-    std::cout << "Neighbor Count: " << neighborCount << std::endl;
-
     if(_alive){
-        if(DEBUGF)
-        std::cout << " I am alive " << std::endl;
         if(neighborCount == 0 ||  neighborCount == 2 || neighborCount == 4){
             _stateToChange = false;
             return false;
@@ -152,9 +140,6 @@ bool FredkinCell::deadOrAlive(std::vector<bool> neighbors){
             return true;
         }
     }else{
-        if(DEBUGF)
-        std::cout << " I am dead " << std::endl;
-
         if(neighborCount == 1 || neighborCount == 3){
             _stateToChange = true;
             return true;
