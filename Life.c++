@@ -18,7 +18,7 @@ AbstractCell::AbstractCell(){}
 AbstractCell::AbstractCell(cell_t cellType, bool alive): _alive(alive), _stateToChange(_alive) , _cellType(cellType){}
 
 AbstractCell::~AbstractCell(){}
-
+bool AbstractCell::diag(){return false;}
 bool AbstractCell::deadOrAlive(std::pair<int, int> neighbors){return 0;}
 bool AbstractCell::getAlive(){return _alive;}
 void AbstractCell::printStatus(std::ostream& w){}
@@ -36,7 +36,7 @@ AbstractCell* AbstractCell::clone() {
 ConwayCell::ConwayCell(){}
 ConwayCell::ConwayCell(bool alive): AbstractCell(CONWAY, alive){}
 ConwayCell::~ConwayCell(){}
-
+bool ConwayCell::diag(){return true;}
 ConwayCell* ConwayCell::clone(){
     return new ConwayCell(*this);
 }
@@ -87,6 +87,8 @@ FredkinCell::~FredkinCell(){}
 FredkinCell* FredkinCell::clone(){
     return new FredkinCell(*this);
 }
+
+bool FredkinCell::diag(){return false;}
 
 void FredkinCell::printStatus(std::ostream& w){
     if(_alive){
@@ -152,6 +154,8 @@ Cell::Cell(bool alive){
 Cell::Cell(const Cell& other): p(other.p->clone()){}
 
 Cell::~Cell(){delete p;}
+
+bool Cell::diag(){return p->diag();}
 
 Cell& Cell::operator=(Cell other){
     std::cout << " here " << std::endl;

@@ -85,7 +85,18 @@ class AbstractCell{
          */
 
         virtual void printStatus(std::ostream& w);
-       
+        
+        //-------
+        // diag
+        //-------
+
+        /**
+         * checks if needs diagonal or not
+         * @return needs diagonals or not
+         */
+
+        virtual bool diag() = 0;
+
         //-----------
         // getAlive
         //-----------
@@ -185,6 +196,17 @@ class ConwayCell : public AbstractCell{
 
         void execute();
 
+        //-------
+        // diag
+        //-------
+
+        /**
+         * checks if needs diagonal or not
+         * @return needs diagonals or not
+         */
+
+         bool diag();
+
         //--------
         // clone
         //--------
@@ -230,8 +252,48 @@ class FredkinCell : public AbstractCell{
          */
         bool deadOrAlive(std::pair<int, int> neighbors);
         
+        //-------
+        // diag
+        //-------
+
+        /**
+         * checks if needs diagonal or not
+         * @return needs diagonals or not
+         */
+
+        bool diag();
+
+        //--------------
+        // printStatus
+        //--------------
+
+        /**
+         * prints cell depending on its state
+         * @param w ostream
+         */
+
         void printStatus(std::ostream& w);
+
+        //---------
+        // execute
+        //---------
+
+        /**
+         * changes state of cell
+         */
+
         void execute();
+        
+
+        //--------
+        // clone
+        //--------
+
+        /**
+         * create exact copy of object
+         * @return exact copy of return object
+         */
+
         FredkinCell* clone();
     private:
         int _age;
@@ -331,6 +393,17 @@ class Cell{
 
         void execute();
 
+        //-------
+        // diag
+        //-------
+
+        /**
+         * checks if needs diagonal or not
+         * @return needs diagonals or not
+         */
+
+        bool diag();
+
         //--------------
         // Destructor
         //--------------
@@ -413,7 +486,7 @@ class Life{
 
             int tempPop = 0;
             for(int i = 0; i < _size; ++i){
-                bool alive = _board[i].deadOrAlive(find_neighbors(i));
+                bool alive = _board[i].deadOrAlive(find_neighbors(i, _board[i].diag()));
                 if(alive){
                     ++tempPop;
                 }
@@ -436,20 +509,14 @@ class Life{
          * @return vector of 8 neighbors of current cell
          */
 
-        std::pair<int, int> find_neighbors(int pos){
-            // std::pair<int, int> n;
-            int diag = statusOfNeighbor(pos, NE) + statusOfNeighbor(pos, SE) + 
-                       statusOfNeighbor(pos, SW) + statusOfNeighbor(pos, NW);
-            int normal = statusOfNeighbor(pos, N) + statusOfNeighbor(pos, E) +
+        std::pair<int, int> find_neighbors(int pos, bool needDiagonal){
+            int diag = 0;
+            int normal = 0;
+            if(needDiagonal)
+                diag = statusOfNeighbor(pos, NE) + statusOfNeighbor(pos, SE) + 
+                           statusOfNeighbor(pos, SW) + statusOfNeighbor(pos, NW);
+            normal = statusOfNeighbor(pos, N) + statusOfNeighbor(pos, E) +
                          statusOfNeighbor(pos, S) + statusOfNeighbor(pos, W);
-            // n.push_back(statusOfNeighbor(pos, N));
-            // n.push_back(statusOfNeighbor(pos, NE));
-            // n.push_back(statusOfNeighbor(pos, E));
-            // n.push_back(statusOfNeighbor(pos, SE));
-            // n.push_back(statusOfNeighbor(pos, S));
-            // n.push_back(statusOfNeighbor(pos, SW));
-            // n.push_back(statusOfNeighbor(pos, W));
-            // n.push_back(statusOfNeighbor(pos, NW));
             return std::pair<int, int>(normal, diag);
         }
 
