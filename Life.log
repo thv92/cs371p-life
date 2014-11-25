@@ -1,0 +1,173 @@
+commit c8f378dd43ae974a48db9df4a11283a3dedb7fbf
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Tue Nov 25 05:20:26 2014 -0600
+
+    doxyfile?
+
+commit 26d4a6c0a5ffbc020460befe595288216c9dbfd4
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Tue Nov 25 05:09:15 2014 -0600
+
+    Ran gcov
+
+commit 3e67b5fc12d1b571f63440aad9df990c40cdfe4b
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Tue Nov 25 05:02:25 2014 -0600
+
+    Corrected uml, unit tests done. No more touching till gcov and doxygen
+
+commit 2f1cd41833111b6240c0a5c5d9566684fc1f3fef
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Mon Nov 24 18:43:38 2014 -0600
+
+    added some tests
+
+commit f8eab1ae4191ac55c451b8fb5246104044aa0369
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Mon Nov 24 18:27:49 2014 -0600
+
+    Changed life constructor. final?
+
+commit 77d58d34eda6ad55fa495b6390e010e886f3cc23
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Mon Nov 24 17:19:25 2014 -0600
+
+    5 seconds faster now!
+
+commit fdc798db8e6fb8b72bdcebb03e5796fcea91f839
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Mon Nov 24 16:43:59 2014 -0600
+
+    added more tests
+
+commit e1362f163d5454c62a7ec6ea39f6386fe07a70dc
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Mon Nov 24 16:32:37 2014 -0600
+
+    Redited uml file
+
+commit f45db7486b055a053e4dd5f1406c8abc7d2a544d
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Mon Nov 24 16:00:54 2014 -0600
+
+    Test cases now have access to public/protected things
+
+commit 5175950cbe4388800a53e40f44224b8f39fa33bb
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Mon Nov 24 15:59:21 2014 -0600
+
+    Fixed newline issue
+
+commit f48b54beab9e733cb7b34eb3a046f523b2595caa
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Mon Nov 24 15:22:51 2014 -0600
+
+    added uml diagram
+
+commit ac81d3f5168f7c94f05f98a46089e1b41af56471
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Mon Nov 24 12:01:19 2014 -0600
+
+    idk what i did. still works
+
+commit bc4a86c4612c793a6acc069bd3e0034de76fb3e3
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Mon Nov 24 11:51:01 2014 -0600
+
+    added diag method
+
+commit 2cf714e11006a0d93b8109b5af10286c19f02737
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Mon Nov 24 11:35:14 2014 -0600
+
+    Made it a bit faster
+
+commit d46760d9d0a39e1a48ea4eacf6d17f5f5877943f
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Mon Nov 24 03:50:17 2014 -0600
+
+    Unit tests in progress (just began)
+
+commit 1c61fb5e69c5ddf2207e732d5517ea1089bfef2d
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Sun Nov 23 20:54:16 2014 -0600
+
+    Documentation done. Unit tests next. Fixes #20
+
+commit 9aabc84f36fbce995a10c5ba9bac6eb388929247
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Fri Nov 21 14:01:56 2014 -0600
+
+    Nothing changed
+
+commit 405700f0d82d111b97ffc6dbbe546327c868735b
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Fri Nov 21 13:53:28 2014 -0600
+
+    Implemented cloning. everything works no memory leaks
+
+commit d516857d0829271131714d2f01a7a126857e0419
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Wed Nov 19 18:47:33 2014 -0600
+
+    Everything works! Fixes #19, Fixes #17
+
+commit 515a9cb30897912a0d7abe46765fe2b2e45074cd
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Wed Nov 19 11:29:05 2014 -0600
+
+    no changes in progression
+
+commit e9c435e71c7ad7fe6c25808dbb333d388acf7081
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Wed Nov 19 04:29:29 2014 -0600
+
+    Did fredkin logic. Fixes #15 Fixes #18
+
+commit 0233a65741f45a790f4abfa01a5b267cfce9a82d
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Tue Nov 18 23:25:58 2014 -0600
+
+    Conway works for second test. Might need to reimplement fredkin
+
+commit 89aaed8f40c21335b3a97b70982433e4cf7e2a3e
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Tue Nov 18 03:40:17 2014 -0600
+
+    Added fredkin logic, have not tested Fixes #16
+
+commit 7b39e9ee03d89eb04520f9caf9164103e753385c
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Tue Nov 18 03:33:21 2014 -0600
+
+    Conway logic done. I think. First test same output
+
+commit a40bc4a66a1bceed368c1d09627c80fe629c4563
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Mon Nov 17 00:44:52 2014 -0600
+
+    Read should work now. Fixes #14
+
+commit 5ce4d2258ef760180dd845e470ee61f2cb8a0389
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Sun Nov 16 23:18:42 2014 -0600
+
+    Moved Life class to Life.h, halfway done with reading Fixes #13
+
+commit 9ffcd25218d8abf3ae3fabb11cb9ca5b613a995d
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Sun Nov 16 21:28:07 2014 -0600
+
+    things not working, ignore
+
+commit 2e7d857b1454eedee04cd46d145603a51628c9f6
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Sun Nov 16 20:02:57 2014 -0600
+
+    added more skeleton files Fixes #12
+
+commit 4a555f207e3a0b5a82b8aa55ae4531d2e60f1f10
+Author: Thien Vo <vohuythien@utexas.edu>
+Date:   Thu Nov 13 01:24:29 2014 -0600
+
+    Adding skeleton files, Fixes #11
