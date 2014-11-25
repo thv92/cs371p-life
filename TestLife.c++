@@ -848,3 +848,22 @@ TEST(Life, test_life_18){
     k.printGrid(w);
     ASSERT_EQ(w.str(), "\nGeneration = 21, Population = 10.\n......\n.....1\n..*.*.\n.*..*.\n*...*.\n.***.-\n");
 }
+
+
+TEST(Life, test_life_19){
+    int x = 6;
+    int y = 6;
+    Life<Cell> k(y, x);
+
+    std::istringstream i("\n00-0-0\n0-0-0-\n0-00-0\n00000-\n00-00-\n00**--");
+    std::ostringstream w;
+
+    k.prepareBoard(i);
+
+    for(int i = 0; i <= 20; ++i)
+        k.simulate();
+
+
+    k.printGrid(w);
+    ASSERT_EQ(w.str(), "\nGeneration = 21, Population = 15.\n..***.\n.*..*1\n****..\n.*...*\n..*...\n...*.*\n");
+}
