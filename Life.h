@@ -149,7 +149,7 @@ class ConwayCell : public AbstractCell{
 
         /**
          * creation of conway cell with state
-         * @param char * or -
+         * @param alive char * or -
          */
 
         ConwayCell(char alive);
@@ -237,6 +237,7 @@ class FredkinCell : public AbstractCell{
          */
 
         FredkinCell(char alive);
+
         ~FredkinCell();
 
         //-------------
@@ -526,7 +527,9 @@ class Life{
 
         /**
          * get all 8 neighbors of current cell
-         * @param pos int determining current position of cell
+         * @param row int y position in 2d vector
+         * @param col int x position in 2d vector
+         * @param needDiagonal bool checks to see if we need to calculate diagonals
          * @return vector of 8 neighbors of current cell
          */
 
@@ -546,7 +549,8 @@ class Life{
 
         /**
          * get state of specified neighbor
-         * @param pos position of current cell
+         * @param row int y position in 2d vector
+         * @param col int x position in 2d vector
          * @param dir state of neighbor to acquire in that direction
          * @return state of specified neighbor 
          */
@@ -599,7 +603,8 @@ class Life{
 
         /**
          * checks to see if coordinates are out of bounds of _board in 2d sense
-         * @param coord position to check
+         * @param rowToCheck int row index to check
+         * @param colToCheck int col index to check
          * @return true if out of bounds
          */
 
@@ -617,7 +622,6 @@ class Life{
         /**
          * print current generation's board
          * @param w ostream 
-         * @param gen_gone int generations gone by
          */
 
         void printGrid(std::ostream& w){
