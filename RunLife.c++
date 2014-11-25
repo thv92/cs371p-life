@@ -12,7 +12,7 @@
 #include <iostream> // cout, endl
 #include "Life.h"
 
-
+ 
 // ----
 // main
 // ----
