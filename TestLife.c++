@@ -23,6 +23,7 @@ TEST(ConwayCell, test_conway_constructor_1){
 TEST(ConwayCell, test_conway_constructor_2){
     ConwayCell k(false);
     ASSERT_EQ(k.getAlive(), false);
+    ASSERT_EQ(k._cellType, 0);
 }
 
 TEST(FredkinCell, test_fredkin_constructor_1){
@@ -42,6 +43,7 @@ TEST(FredkinCell, test_fredkin_constructor_3){
     k.printStatus(w);
     ASSERT_EQ(w.str(), "0");
     ASSERT_EQ(k._age, 0);
+    ASSERT_EQ(k._cellType, 1);
 }
 
 TEST(Cell, test_cell_constructor_1){
