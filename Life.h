@@ -436,8 +436,8 @@ class Life{
          * @param y number of columns
          */
 
-        Life(const int& y, const int& x, const int& total_turns): 
-                    _x(x), _y(y), _size(_x*_y), _total_turns(total_turns), _gen_gone(0), _pop(0){}
+        Life(const int& y, const int& x): 
+                    _x(x), _y(y), _size(_x*_y), _gen_gone(0), _pop(0){}
 
 
         //--------------
@@ -607,9 +607,7 @@ class Life{
          */
 
         void printGrid(std::ostream& w){
-            if(_gen_gone == 0){
-                w << std::endl;
-            }
+            w << std::endl;
 
             w << "Generation = " << _gen_gone << ", "
               << "Population = " << _pop << "." << std::endl;
@@ -619,9 +617,7 @@ class Life{
                 }
                 w << std::endl;
             }
-            if(_gen_gone < _total_turns){
-                w << std::endl;
-            }
+            // w << std::endl;
         }
 
 
@@ -629,7 +625,6 @@ class Life{
         const int _x;
         const int _y;
         const int _size;        //total size of _board
-        const int _total_turns; //total generations
         int _gen_gone;           //generations gone by
         int _pop;               //population
         std::vector<std::vector<T>> _board;  //board of cells

@@ -39,7 +39,7 @@ int main () {
     
 
 
-    Life<ConwayCell> board1(y1, x1, 12); 
+    Life<ConwayCell> board1(y1, x1); 
     board1.prepareBoard(std::cin);
     for(int i = 0; i <= 12; ++i){
         board1.printGrid(std::cout);
@@ -65,7 +65,7 @@ int main () {
     std::cin >> x2;
     
 
-    Life<ConwayCell> board2(y2, x2, 28); 
+    Life<ConwayCell> board2(y2, x2); 
     board2.prepareBoard(std::cin);
     for(int i = 0; i <= 28; ++i){
         if( (i == 0) || ( ( (i%4) == 0) && (i >= 4) ) ){
@@ -98,7 +98,7 @@ int main () {
     std::cin >> x3;
     
 
-    Life<ConwayCell> board3(y3, x3, 2500); 
+    Life<ConwayCell> board3(y3, x3); 
     board3.prepareBoard(std::cin);
     for(int i = 0; i <= 2500; ++i){
         if( i < 10 || i == 283 || i == 323 || i == 2500 ){
@@ -129,7 +129,7 @@ int main () {
     std::cin >> x4;
     
 
-    Life<FredkinCell> board4(y4, x4, 5); 
+    Life<FredkinCell> board4(y4, x4); 
     board4.prepareBoard(std::cin);
     for(int i = 0; i <= 5; ++i){
         board4.printGrid(std::cout);
@@ -160,7 +160,7 @@ int main () {
     std::cin >> y5;
     std::cin >> x5;
     
-    Life<Cell> board5(y5, x5, 5); 
+    Life<Cell> board5(y5, x5); 
     board5.prepareBoard(std::cin);
     for(int i = 0; i <= 5; ++i){
         board5.printGrid(std::cout);

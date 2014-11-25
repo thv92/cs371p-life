@@ -1,3 +1,6 @@
+#define private public
+#define protected public
+
 //----------
 // includes
 // ---------
@@ -9,8 +12,6 @@
 #include <utility>  // pair
 
 #include "gtest/gtest.h"
-#define private public
-#define protected public
 
 using namespace std;
 
@@ -40,11 +41,12 @@ TEST(FredkinCell, test_fredkin_constructor_3){
     ASSERT_EQ(k.getAlive(), true);
     k.printStatus(w);
     ASSERT_EQ(w.str(), "0");
+    ASSERT_EQ(k._age, 0);
 }
 
 TEST(Cell, test_cell_constructor_1){
     Cell k(true);
-    ASSERT_EQ(FredkinCell::k.getAlive(), true);
+    // ASSERT_EQ(public k._, true);
 }
 
 
