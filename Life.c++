@@ -34,7 +34,8 @@ AbstractCell* AbstractCell::clone() {
 
 
 ConwayCell::ConwayCell(){}
-ConwayCell::ConwayCell(bool alive): AbstractCell(CONWAY, alive){}
+ConwayCell::ConwayCell(char alive): AbstractCell(CONWAY, alive == '*'){
+}
 ConwayCell::~ConwayCell(){}
 bool ConwayCell::diag(){return true;}
 ConwayCell* ConwayCell::clone(){
@@ -81,7 +82,7 @@ void ConwayCell::execute(){
 //-------------
 
 FredkinCell::FredkinCell(){}
-FredkinCell::FredkinCell(bool alive): AbstractCell(FREDKIN, alive), _age(0){}
+FredkinCell::FredkinCell(char alive): AbstractCell(FREDKIN, ((alive >= '0') && (alive <= '9')) || (alive == '+')), _age(0){}
 FredkinCell::~FredkinCell(){}
 FredkinCell* FredkinCell::clone(){
     return new FredkinCell(*this);
@@ -145,8 +146,12 @@ void FredkinCell::execute(){
 //--------------
 
 Cell::Cell(){}
-Cell::Cell(bool alive){
-    p = new FredkinCell(alive);
+Cell::Cell(char alive){
+    if(alive == '*' || alive == '.'){
+        p = new ConwayCell(alive);
+    }else if(((alive >= '0') && (alive <= '9')) || (alive == '+') || (alive == '-')){
+        p = new FredkinCell(alive);
+    }
 }
 
 Cell::Cell(const Cell& other): p(other.p->clone()){}
@@ -171,7 +176,7 @@ void Cell::execute(){
         if(FredkinCell* f = dynamic_cast<FredkinCell*>(p) ){
             if(f->amITwoYears() == 0){
                 delete p;
-                p = new ConwayCell(true);
+                p = new ConwayCell('*');
             }
         }
     }

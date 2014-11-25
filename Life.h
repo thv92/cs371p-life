@@ -149,10 +149,10 @@ class ConwayCell : public AbstractCell{
 
         /**
          * creation of conway cell with state
-         * @param alive dead or alive
+         * @param char * or -
          */
 
-        ConwayCell(bool alive);
+        ConwayCell(char alive);
         
         //--------------
         // Destructor
@@ -227,7 +227,16 @@ class ConwayCell : public AbstractCell{
 class FredkinCell : public AbstractCell{
     public:
         FredkinCell();
-        FredkinCell(bool alive);
+
+        //-------------
+        // Constructor
+        //-------------
+
+        /**
+         * @param alive 0 >=, +, -, <=9
+         */
+
+        FredkinCell(char alive);
         ~FredkinCell();
 
         //-------------
@@ -321,10 +330,10 @@ class Cell{
 
         /**
          * construct cell with specified state 
-         * @param alive boolean specifying state of cell
+         * @param alive char specifying which cell to instantiate based on type of char
          */
 
-        Cell(bool alive);
+        Cell(char alive);
 
         //------------------
         // Copy Constructor
@@ -450,25 +459,31 @@ class Life{
          */
 
         void prepareBoard(std::istream& r){
-            int index = 0;
             for(int i = 0; i < _y; ++i){
                 std::vector<T> temp;
                 _board.push_back(temp);
 
                 r.ignore(80, '\n');
+                
                 while((r.peek() != '\n') && (r.peek() != EOF)){
                     char k;
                     r >> k;
-
-                    //dead = . | alive = something else
-                    bool alive = k == '.' || k == '-' ? false : true;
-                    
-                    _board[i].push_back(T(alive));
+                
+                    bool alive = false;
+                
+                    if(k == '.'){
+                        alive = false;
+                    }else if(k == '*'){
+                        alive = true;
+                    }else if(k == '-'){
+                        alive = false;
+                    }else if( (k >= '0' && k <= '9') || (k == '+')){
+                        alive = true;
+                    }
+                    _board[i].push_back(T(k));
                     if(alive){
                         ++_pop;
                     }
-
-                    ++index;
                 }
             }
         }
@@ -480,10 +495,9 @@ class Life{
 
         /**
          * simulate life cycle of cells for each generation
-         * @param w ostream to print board
          */
 
-        void simulate(std::ostream& w){
+        void simulate(){
 
             int tempPop = 0;
             for(int i = 0; i < _y; ++i){
@@ -617,7 +631,6 @@ class Life{
                 }
                 w << std::endl;
             }
-            // w << std::endl;
         }
 
 

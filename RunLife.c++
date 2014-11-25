@@ -43,7 +43,7 @@ int main () {
     board1.prepareBoard(std::cin);
     for(int i = 0; i <= 12; ++i){
         board1.printGrid(std::cout);
-        board1.simulate(std::cout);
+        board1.simulate();
     }
 
 
@@ -71,7 +71,7 @@ int main () {
         if( (i == 0) || ( ( (i%4) == 0) && (i >= 4) ) ){
             board2.printGrid(std::cout);
         }
-        board2.simulate(std::cout);
+        board2.simulate();
     }
 
 
@@ -104,11 +104,8 @@ int main () {
         if( i < 10 || i == 283 || i == 323 || i == 2500 ){
             board3.printGrid(std::cout);
         }
-        board3.simulate(std::cout);
+        board3.simulate();
     }
-
-
-
 
 
     // ------------------
@@ -133,14 +130,8 @@ int main () {
     board4.prepareBoard(std::cin);
     for(int i = 0; i <= 5; ++i){
         board4.printGrid(std::cout);
-        board4.simulate(std::cout);
+        board4.simulate();
     }
-
-
-
-
-
-
 
 
     // ----------
@@ -164,7 +155,7 @@ int main () {
     board5.prepareBoard(std::cin);
     for(int i = 0; i <= 5; ++i){
         board5.printGrid(std::cout);
-        board5.simulate(std::cout);
+        board5.simulate();
     }
 
     return 0;}
